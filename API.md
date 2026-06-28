@@ -2,7 +2,7 @@
 
 > **Public docs note:** Transaction semantics, paywall flows, worker safety, geofence logic, and seat-capacity implementation are withheld from this repository. Registered developers receive the full integration guide — contact **dev@niilox.com**.
 
-**Niilox API** (`api.driftin.live`) exposes a single HTTP + WebSocket surface for all tenants (`drift`, `geogig`, `rodent`, and partner apps). Every request that mutates tenant-scoped data carries:
+**Niilox API** (`api.niilox.com`) exposes a single HTTP + WebSocket surface for all tenants (`drift`, `geogig`, `rodent`, and partner apps). Every request that mutates tenant-scoped data carries:
 
 New to the API? Start with [`README.md`](./README.md) → [Getting started](./GETTING_STARTED.md). No-code: [Bubble.io](./BUBBLE_IO.md).
 

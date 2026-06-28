@@ -7,7 +7,7 @@ Tenant-scoped **WebRTC signaling** (SDP, ICE, room join) and **STUN/TURN** for `
 Clients must load ICE from the API — **do not** ship TURN passwords in static `config.json` for production.
 
 ```bash
-curl -s "https://api.driftin.live/api/v1/peer/ice" \
+curl -s "https://api.niilox.com/api/v1/peer/ice" \
   -H "X-App-ID: rodent"
 ```
 
@@ -55,7 +55,7 @@ Protocol matches the legacy Rodent Node server wire format (`join`, `offer`, `an
 
 ```javascript
 const APP_ID = 'my_app'
-const API = 'https://api.driftin.live/api/v1'
+const API = 'https://api.niilox.com/api/v1'
 
 const { ice_servers } = await fetch(`${API}/peer/ice`, {
   headers: { 'X-App-ID': APP_ID }
@@ -64,7 +64,7 @@ const { ice_servers } = await fetch(`${API}/peer/ice`, {
 const pc = new RTCPeerConnection({ iceServers: ice_servers })
 
 const ws = new WebSocket(
-  `wss://api.driftin.live/api/v1/peer/signal?app_id=${APP_ID}`
+  `wss://api.niilox.com/api/v1/peer/signal?app_id=${APP_ID}`
 )
 ```
 

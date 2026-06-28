@@ -1,6 +1,6 @@
 # GeoGig integration (`X-App-ID: geogig`)
 
-[GeoGig](https://github.com/Dr-M06/geogig) is the reference mobile app for local gigs — chores, dog walks, errands, and help around the neighborhood. It runs on **Niilox API** at `https://api.driftin.live/api/v1` with tenant header `X-App-ID: geogig`.
+[GeoGig](https://github.com/Dr-M06/geogig) is the reference mobile app for local gigs — chores, dog walks, errands, and help around the neighborhood. It runs on **Niilox API** at `https://api.niilox.com/api/v1` with tenant header `X-App-ID: geogig`.
 
 ## What GeoGig uses from Niilox
 
@@ -43,12 +43,12 @@ Opens Google OAuth. Callback redirects to `GEOGIG_APP_URL/auth/finish?token=<jwt
 Requires SMS to be enabled on your tenant (see `GET /api/v1/sms/status` or contact Niilox).
 
 ```bash
-curl -s https://api.driftin.live/api/v1/auth/phone/send \
+curl -s https://api.niilox.com/api/v1/auth/phone/send \
   -H "X-App-ID: geogig" \
   -H "Content-Type: application/json" \
   -d '{"phone":"+2348012345678"}'
 
-curl -s https://api.driftin.live/api/v1/auth/phone/verify \
+curl -s https://api.niilox.com/api/v1/auth/phone/verify \
   -H "X-App-ID: geogig" \
   -H "Content-Type: application/json" \
   -d '{"phone":"+2348012345678","code":"123456"}'
@@ -80,7 +80,7 @@ Full lifecycle documentation: **dev@niilox.com**.
 
 Gig events (check-in, check-out, location, alerts), DMs, and bell notifications are pushed on the personal WebSocket.
 
-Connect: `wss://api.driftin.live/ws/me?token=<access_jwt>`.
+Connect: `wss://api.niilox.com/ws/me?token=<access_jwt>`.
 
 ## P2P video glance
 

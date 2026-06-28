@@ -22,10 +22,10 @@ Existing first-party tenants: `drift` (live video), `geogig` (local gigs), `rode
 ## 3. Verify connectivity
 
 ```bash
-curl -s https://api.driftin.live/health
+curl -s https://api.niilox.com/health
 # {"ok":true}
 
-curl -s https://api.driftin.live/api/v1/platform/ping \
+curl -s https://api.niilox.com/api/v1/platform/ping \
   -H "Authorization: Bearer niilox_sk_YOUR_KEY" \
   -H "X-App-ID: myapp"
 ```
@@ -44,7 +44,7 @@ For a quick test user session (no UI):
 
 ```bash
 # Guest (watch-only, 24h)
-curl -s https://api.driftin.live/api/v1/auth/guest \
+curl -s https://api.niilox.com/api/v1/auth/guest \
   -H "X-App-ID: myapp" \
   -H "Content-Type: application/json" \
   -d "{}"
@@ -55,7 +55,7 @@ Save `token` from the response. For production sign-in use magic link, password,
 **GeoGig example (phone OTP):**
 
 ```bash
-curl -s https://api.driftin.live/api/v1/auth/phone/send \
+curl -s https://api.niilox.com/api/v1/auth/phone/send \
   -H "X-App-ID: geogig" \
   -H "Content-Type: application/json" \
   -d '{"phone":"+2348012345678"}'
@@ -66,7 +66,7 @@ curl -s https://api.driftin.live/api/v1/auth/phone/send \
 **Live video tenant:**
 
 ```bash
-curl -s "https://api.driftin.live/api/v1/rooms" \
+curl -s "https://api.niilox.com/api/v1/rooms" \
   -H "Authorization: Bearer USER_JWT" \
   -H "X-App-ID: myapp"
 ```
@@ -74,7 +74,7 @@ curl -s "https://api.driftin.live/api/v1/rooms" \
 **Gig marketplace (GeoGig):**
 
 ```bash
-curl -s "https://api.driftin.live/api/v1/gigs" \
+curl -s "https://api.niilox.com/api/v1/gigs" \
   -H "X-App-ID: geogig"
 ```
 
@@ -95,8 +95,8 @@ Details: [Tenant business](./TENANT_BUSINESS.md).
 
 Connect WebSockets after the user has a JWT:
 
-- Room: `wss://api.driftin.live/ws/rooms/{roomID}?token=JWT`  
-- Personal: `wss://api.driftin.live/ws/me?token=JWT`
+- Room: `wss://api.niilox.com/ws/rooms/{roomID}?token=JWT`  
+- Personal: `wss://api.niilox.com/ws/me?token=JWT`
 
 Event list: [Developer integration](./DEVELOPER_INTEGRATION.md#5-realtime-events-you-should-handle-first). GeoGig gig events (`gig:checked_in`, etc.) also arrive on `/ws/me`.
 

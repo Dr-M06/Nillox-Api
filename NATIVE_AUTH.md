@@ -17,9 +17,9 @@ For historical cutover steps, see [POSTGRES_MIGRATION.md](./POSTGRES_MIGRATION.m
 |----------|---------|
 | `DATABASE_URL` | Your Postgres (required) |
 | `SUPABASE_URL` | **Removed in production** — legacy bridge only if you maintain a fork |
-| `API_PUBLIC_URL` | Public API origin, e.g. `https://api.driftin.live` |
+| `API_PUBLIC_URL` | Public API origin, e.g. `https://api.niilox.com` |
 | `GOOGLE_CLIENT_ID` / `GOOGLE_CLIENT_SECRET` | Google OAuth for Drift |
-| `GOOGLE_REDIRECT_URL` | Drift callback, e.g. `https://api.driftin.live/auth/google/callback` |
+| `GOOGLE_REDIRECT_URL` | Drift callback, e.g. `https://api.niilox.com/auth/google/callback` |
 | `GOOGLE_REDIRECT_URL_RODENT` | Rodent callback (optional separate OAuth client) |
 | `GEOGIG_APP_URL` | GeoGig web origin for OAuth/magic finish (e.g. `https://geogig.example.com`) |
 | `RABBALY_APP_URL` | Rabbaly app origin for OAuth finish |

@@ -18,7 +18,7 @@ Use this together with the full reference in [`API.md`](./API.md).
 
 ## 1) Base URL and auth model
 
-- Base API URL (production): `https://api.driftin.live/api/v1`
+- Base API URL (production): `https://api.niilox.com/api/v1`
 - Tenant selector: `X-App-ID: <tenant_id>` (defaults to `drift` if omitted)
 - Auth types:
   - End-user JWT (`Authorization: Bearer <drift_jwt>`) for user flows (rooms, chat, gifts, DMs, wallet)
@@ -40,13 +40,13 @@ Important: API keys are not a replacement for end-user session tokens.
 ### Health check
 
 ```bash
-curl -s https://api.driftin.live/health
+curl -s https://api.niilox.com/health
 ```
 
 ### Platform ping (B2B API key)
 
 ```bash
-curl -s https://api.driftin.live/api/v1/platform/ping \
+curl -s https://api.niilox.com/api/v1/platform/ping \
   -H "Authorization: Bearer niilox_sk_your_key_here" \
   -H "X-App-ID: locust"
 ```
@@ -60,7 +60,7 @@ Expected shape:
 ### Guest token (watch-only session)
 
 ```bash
-curl -s https://api.driftin.live/api/v1/auth/guest \
+curl -s https://api.niilox.com/api/v1/auth/guest \
   -H "Content-Type: application/json" \
   -H "X-App-ID: locust" \
   -d "{}"
@@ -69,7 +69,7 @@ curl -s https://api.driftin.live/api/v1/auth/guest \
 ### List live rooms
 
 ```bash
-curl -s "https://api.driftin.live/api/v1/rooms?category=music" \
+curl -s "https://api.niilox.com/api/v1/rooms?category=music" \
   -H "Authorization: Bearer <guest_or_user_jwt>" \
   -H "X-App-ID: locust"
 ```
@@ -96,7 +96,7 @@ For web, React, or Expo apps in the monorepo, use **`@niilox/sdk`** (`packages/n
 
 - **24 modules** on `NiiloxClient` — auth, rooms, **seats** (capped VIP/events), gifts, stage, moderation, payments, gigs, peer, DMs, push, platform, …
 - Realtime: `PersonalSocket`, `RoomSocket`
-- **v0.1 beta** — monorepo `file:` install only; not on npm yet
+- **v0.1 beta** — `npm install @niilox/sdk` ([npm](https://www.npmjs.com/package/@niilox/sdk))
 
 ```ts
 import { createNiiloxClient } from '@niilox/sdk'

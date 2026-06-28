@@ -66,7 +66,11 @@ Every request must include **`X-App-ID: myapp`**.
 
 ### 3. Install the SDK
 
-Monorepo:
+```bash
+npm install @niilox/sdk
+```
+
+Monorepo contributors:
 
 ```json
 "@niilox/sdk": "file:../packages/niilox-sdk"
@@ -163,13 +167,16 @@ The consumer app at [driftin.live](https://www.driftin.live) uses tenant **`drif
 
 ---
 
-## DNS cutover (operators)
+## Production hosts (operators)
 
-1. CNAME **`api.niilox.com`** → same origin as current API (or new load balancer).
-2. TLS certificate for `api.niilox.com`.
-3. Set `API_PUBLIC_URL=https://api.niilox.com` on the Go API.
-4. Portal Vercel: `API_PROXY_TARGET=https://api.niilox.com` (or legacy host until DNS propagates).
-5. Keep `api.driftin.live` as alias for **drift** tenant until deprecated.
+Niilox cutover is **live** (2026):
+
+| Item | Status |
+|------|--------|
+| `api.niilox.com` → API VPS | Done (Cloudflare A + nginx TLS) |
+| `API_PUBLIC_URL=https://api.niilox.com` | Set on production API |
+| Portal `API_PROXY_TARGET=https://api.niilox.com` | Set in Vercel + `vercel.json` |
+| `api.driftin.live` | Legacy alias on same VPS — keep until Drift consumer migrates |
 
 ---
 

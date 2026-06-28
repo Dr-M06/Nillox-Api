@@ -61,7 +61,7 @@ Full walkthrough → [**Getting started**](./GETTING_STARTED.md) (~15 min).
 ### Official SDK (`@niilox/sdk` v0.1 beta)
 
 See **[Platform status](./PLATFORM_STATUS.md)** for the full backend + frontends + ops picture.  
-SDK detail: monorepo `packages/niilox-sdk/README.md` (not on npm yet).
+SDK detail: [`@niilox/sdk` on npm](https://www.npmjs.com/package/@niilox/sdk) and monorepo `packages/niilox-sdk/README.md`.
 
 ---
 
@@ -142,7 +142,16 @@ Reference apps: [GeoGig](https://github.com/Dr-M06/geogig) · [Drift](https://dr
 
 ## About this repo
 
-This repository is the **public documentation mirror** for integrators. It contains guides only — no server source code or production secrets.
+This repository is the **public documentation mirror** for Niilox integrators. It contains guides only — no server source code or production secrets.
+
+**GitHub remotes** (same content, different orgs):
+
+| Remote | Repository |
+|--------|------------|
+| `origin` | [Dr-M06/locust-api](https://github.com/Dr-M06/locust-api) |
+| `niilox` | [niilox-communications/niilox-api](https://github.com/niilox-communications/niilox-api) |
+
+Monorepo copy in the Drift workspace: keep in sync with [`backend/drift/docs/`](../backend/drift/docs/).
 
 - **In-browser docs:** [www.niilox.com/portal/dashboard/docs](https://www.niilox.com/portal/dashboard/docs)
 - **About Niilox:** [www.niilox.com/about](https://www.niilox.com/about)

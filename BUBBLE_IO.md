@@ -1,6 +1,6 @@
 # Bubble.io integration
 
-Build a live-streaming app on Bubble using the Locust API (`api.driftin.live`). This guide uses Bubble’s **API Connector** and **backend workflows** so secrets stay off the client.
+Build a live-streaming app on Bubble using the **Niilox API** (`api.niilox.com`). This guide uses Bubble’s **API Connector** and **backend workflows** so secrets stay off the client.
 
 ## Before you start
 
@@ -26,7 +26,7 @@ Build a live-streaming app on Bubble using the Locust API (`api.driftin.live`). 
 └───────────────────────────┬─────────────────────────────┘
                             │
                             ▼
-              https://api.driftin.live/api/v1
+              https://api.niilox.com/api/v1
               Header: X-App-ID: myapp
 ```
 
@@ -57,17 +57,17 @@ Do **not** put the API key in shared headers if any call runs from the browser w
 All product calls use:
 
 ```text
-https://api.driftin.live/api/v1
+https://api.niilox.com/api/v1
 ```
 
-Liveness (no `/api/v1`, no auth): `https://api.driftin.live/health` → `{"ok":true}`.
+Liveness (no `/api/v1`, no auth): `https://api.niilox.com/health` → `{"ok":true}`.
 
 ### Verify from terminal (before Bubble)
 
 ```bash
-curl -s https://api.driftin.live/health
+curl -s https://api.niilox.com/health
 
-curl -s https://api.driftin.live/api/v1/platform/ping \
+curl -s https://api.niilox.com/api/v1/platform/ping \
   -H "Authorization: Bearer niilox_sk_YOUR_KEY" \
   -H "X-App-ID: your_app_id"
 ```
@@ -87,7 +87,7 @@ Use this only to confirm Bubble can reach the API. **Do not** put `Authorization
 | Field | Value |
 |-------|--------|
 | Method | GET |
-| URL | `https://api.driftin.live/health` |
+| URL | `https://api.niilox.com/health` |
 | **Data type** | **JSON** |
 | **Use as** | Data |
 
@@ -100,7 +100,7 @@ If you still see *“returns a non-object and you picked JSON”*, the productio
 | Field | Value |
 |-------|--------|
 | Method | GET |
-| URL | `https://api.driftin.live/api/v1/platform/ping` |
+| URL | `https://api.niilox.com/api/v1/platform/ping` |
 | Header | `X-App-ID` = `your_app_id` (can be a **shared** collection header) |
 | Header | `Authorization: Bearer niilox_sk_YOUR_KEY` |
 | **Data type** | **JSON** |
@@ -114,7 +114,7 @@ Run this from a **backend workflow** first (**uncheck** “Attempt to make the c
 | Field | Value |
 |-------|--------|
 | Method | POST |
-| URL | `https://api.driftin.live/api/v1/auth/guest` |
+| URL | `https://api.niilox.com/api/v1/auth/guest` |
 | Body type | JSON |
 | Body | `{}` |
 
@@ -128,7 +128,7 @@ Response fields to save on the user or in `app` custom state:
 | Field | Value |
 |-------|--------|
 | Method | POST |
-| URL | `https://api.driftin.live/api/v1/auth/password/login` |
+| URL | `https://api.niilox.com/api/v1/auth/password/login` |
 | Body | `{"email":"<email>","password":"<password>"}` |
 
 Response:
@@ -148,7 +148,7 @@ Store `token` and `refresh_token` in secure custom states (or user fields). Use 
 **Send link**
 
 | Method | POST |
-| URL | `https://api.driftin.live/api/v1/auth/magic/send` |
+| URL | `https://api.niilox.com/api/v1/auth/magic/send` |
 | Body | `{"email":"user@example.com"}` |
 
 User clicks the link in email (opens your Bubble page with `?token=…` in the URL).
@@ -156,7 +156,7 @@ User clicks the link in email (opens your Bubble page with `?token=…` in the U
 **Verify** (on page load when `token` query param present)
 
 | Method | POST |
-| URL | `https://api.driftin.live/api/v1/auth/magic/verify` |
+| URL | `https://api.niilox.com/api/v1/auth/magic/verify` |
 | Body | `{"token":"<from_url>"}` |
 
 Same response shape as password login.
@@ -164,7 +164,7 @@ Same response shape as password login.
 ### E. Refresh session
 
 | Method | POST |
-| URL | `https://api.driftin.live/api/v1/auth/refresh` |
+| URL | `https://api.niilox.com/api/v1/auth/refresh` |
 | Body | `{"refresh_token":"<stored_refresh>"}` |
 
 Use when a call returns **401** — update stored `token` and retry once.
@@ -172,13 +172,13 @@ Use when a call returns **401** — update stored `token` and retry once.
 ### F. Current user profile
 
 | Method | GET |
-| URL | `https://api.driftin.live/api/v1/users/me` |
+| URL | `https://api.niilox.com/api/v1/users/me` |
 | Header | `Authorization: Bearer <user_jwt>` |
 
 ### G. List rooms (lobby)
 
 | Method | GET |
-| URL | `https://api.driftin.live/api/v1/rooms` |
+| URL | `https://api.niilox.com/api/v1/rooms` |
 | Header | `Authorization: Bearer <user_jwt>` |
 
 Optional query: `?category=music` (`fun`, `music`, `sports`, `gossip`, `vibe`, `adult`).
@@ -188,7 +188,7 @@ Use **Get data from external API** on a repeating group; map JSON list to your U
 ### H. Join room (get livestream token)
 
 | Method | POST |
-| URL | `https://api.driftin.live/api/v1/rooms/[room_id]/join` |
+| URL | `https://api.niilox.com/api/v1/rooms/[room_id]/join` |
 | Header | `Authorization: Bearer <user_jwt>` |
 
 Replace `[room_id]` with a dynamic path segment in Bubble (use `[]` for dynamic parts in API Connector).
@@ -198,14 +198,14 @@ Response includes `token` and `room_name` — pass these into your Niilox livest
 ### I. Send chat message
 
 | Method | POST |
-| URL | `https://api.driftin.live/api/v1/rooms/[room_id]/chat` |
+| URL | `https://api.niilox.com/api/v1/rooms/[room_id]/chat` |
 | Header | `Authorization: Bearer <user_jwt>` |
 | Body | `{"text":"Hello"}` |
 
 ### J. Token packs (store)
 
 | Method | GET |
-| URL | `https://api.driftin.live/api/v1/tokens/packs` |
+| URL | `https://api.niilox.com/api/v1/tokens/packs` |
 | Header | `Authorization: Bearer <user_jwt>` |
 
 Use fields `token_checkout` / `fiat_checkout` and `payment_modes` to show the right purchase UI.
@@ -213,7 +213,7 @@ Use fields `token_checkout` / `fiat_checkout` and `payment_modes` to show the ri
 ### K. Buy tokens (hosted checkout redirect)
 
 | Method | POST |
-| URL | `https://api.driftin.live/api/v1/tokens/checkout` |
+| URL | `https://api.niilox.com/api/v1/tokens/checkout` |
 | Header | `Authorization: Bearer <user_jwt>` |
 | Body | `{"pack_id":"<id from packs>"}` |
 
@@ -227,7 +227,7 @@ After payment, Niilox hosted checkout redirects to your configured success URL; 
 ### L. Fiat VIP room (card, no token wallet)
 
 | Method | POST |
-| URL | `https://api.driftin.live/api/v1/payments/fiat/room-access` |
+| URL | `https://api.niilox.com/api/v1/payments/fiat/room-access` |
 | Header | `Authorization: Bearer <user_jwt>` |
 | Body | `{"room_id":"<uuid>"}` |
 
@@ -236,7 +236,7 @@ Redirect user to returned checkout URL (same pattern as token checkout). Require
 ### M. Fiat gift
 
 | Method | POST |
-| URL | `https://api.driftin.live/api/v1/payments/fiat/gift` |
+| URL | `https://api.niilox.com/api/v1/payments/fiat/gift` |
 | Header | `Authorization: Bearer <user_jwt>` |
 | Body | `{"room_id":"<uuid>","gift_id":"<gift_id>"}` |
 
@@ -296,8 +296,8 @@ Bubble has limited native WebSocket support. Options:
 WebSocket URLs (when you use a custom client or plugin):
 
 ```text
-wss://api.driftin.live/ws/rooms/{roomID}?token=<jwt>
-wss://api.driftin.live/ws/me?token=<jwt>
+wss://api.niilox.com/ws/rooms/{roomID}?token=<jwt>
+wss://api.niilox.com/ws/me?token=<jwt>
 ```
 
 Events: `chat`, `gift`, `presence`, `room:seats`, `end` — see [Developer integration](./DEVELOPER_INTEGRATION.md).
